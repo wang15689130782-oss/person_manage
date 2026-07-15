@@ -19,10 +19,8 @@ def init_db():
 
     if c.execute("SELECT COUNT(*) FROM persons").fetchone()[0] == 0:
         sample_data = []
-        names = ['张', '李', '王', '刘', '陈', '杨', '赵', '黄', '周', '吴',
-                 '徐', '孙', '胡', '朱', '高', '林', '何', '郭', '马', '罗']
-        positions = ['经理', '工程师', '设计师', '测试员', '产品经理',
-                     '运营', '市场', '客服', '财务', 'HR']
+        names = []
+        positions = []
 
         for i in range(20):
             sample_data.append((f'{names[i % 20]}{i + 1}号', positions[i % 10]))
