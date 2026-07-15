@@ -170,7 +170,7 @@
 
     <!-- 添加表单 -->
     <div class="add-form">
-        <form action="/add" method="POST" onsubmit="return validateForm()">
+        <form action="{{ url_for('add_person') }}" method="POST" onsubmit="return validateForm()">
             <input type="text" name="name" id="name" placeholder="姓名" required>
             <input type="text" name="position" id="position" placeholder="职位" required>
             <button type="submit">➕ 添加</button>
@@ -195,7 +195,7 @@
                     <td>{{ person[1] }}</td>
                     <td>{{ person[2] }}</td>
                     <td>
-                        <a href="/delete/{{ person[0] }}?page={{ page }}"
+                        <a href="{{ url_for('delete_person', person_id=person[0], page=page) }}"
                            class="delete-btn"
                            onclick="return confirmDelete('{{ person[1] }}')">
                             🗑️ 删除
@@ -216,8 +216,8 @@
     <div class="pagination">
         <!-- 首页 -->
         {% if page > 1 %}
-            <a href="/page/1">⏮ 首页</a>
-            <a href="/page/{{ page - 1 }}">◀ 上一页</a>
+            <a href="{{ url_for('index', page=1) }}">⏮ 首页</a>
+            <a href="{{ url_for('index', page=page - 1) }}">◀ 上一页</a>
         {% else %}
             <span class="disabled">⏮ 首页</span>
             <span class="disabled">◀ 上一页</span>
@@ -235,7 +235,7 @@
             {% if p == page %}
                 <span class="current">{{ p }}</span>
             {% else %}
-                <a href="/page/{{ p }}">{{ p }}</a>
+                <a href="{{ url_for('index', page=p) }}">{{ p }}</a>
             {% endif %}
         {% endfor %}
 
@@ -245,8 +245,8 @@
 
         <!-- 末页 -->
         {% if page < total_pages %}
-            <a href="/page/{{ page + 1 }}">下一页 ▶</a>
-            <a href="/page/{{ total_pages }}">末页 ⏭</a>
+            <a href="{{ url_for('index', page=page + 1) }}">下一页 ▶</a>
+            <a href="{{ url_for('index', page=total_pages) }}">末页 ⏭</a>
         {% else %}
             <span class="disabled">下一页 ▶</span>
             <span class="disabled">末页 ⏭</span>
